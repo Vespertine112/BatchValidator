@@ -17,7 +17,7 @@ if __name__ == '__main__':
     for item in send_files:
         with open(item) as file:
             raw_html = file.read()
-            headers = {'Content-type':'text/html; charset=UTF-8', 'out':'gnu'}
+            headers = {'Content-type': 'text/html; charset=UTF-8', 'out': 'gnu'}
             response = requests.post(val_url, headers=headers, data=raw_html)
 
             parse_response = response.content
