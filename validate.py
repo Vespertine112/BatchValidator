@@ -14,6 +14,8 @@ if __name__ == '__main__':
         if ".html" in name or ".css" in name:
             send_files.append(name)
 
+    print("===== Report =====")
+
     for item in send_files:
         with open(item) as file:
             raw_html = file.read()
@@ -26,3 +28,5 @@ if __name__ == '__main__':
                 print(item + " : Failed")
             else:
                 print(item + " : Success")
+
+    print("====== End ======")
