@@ -27,9 +27,14 @@ def main():
     for item in send_files:
         with open(item) as file:
             raw_html = file.read()
-            headers = {'Content-type': 'text/html; charset=UTF-8', 'out': 'gnu'}
-            response = requests.post(url, headers=headers, data=raw_html)
 
+            # Update header for css or html validation
+            if ".css" in item:
+                headers = {'Content-type': 'text/css; charset=UTF-8', 'out': 'gnu'}
+            else:
+                headers = {'Content-type': 'text/html; charset=UTF-8', 'out': 'gnu'}
+
+            response = requests.post(url, headers=headers, data=raw_html)
             response = response.content
 
             if b"There were errors" in response:
