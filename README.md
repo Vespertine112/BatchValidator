@@ -5,5 +5,4 @@ Simply place the script within the directory containing the files and run, an ou
 
 ## Tentative Updates
 - navigate with os.walk
-- better validation of success/fail with REST response
-- better reporting
+
