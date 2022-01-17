@@ -50,8 +50,10 @@ def main():
 
 def parse_response_html(error_dict):
     for key in error_dict:
+    # The key is the file name, the value is the response for the file.
         print(f"====== Errors within {key} ======")
         soup = BeautifulSoup(error_dict[key], "html.parser")
+
         all_errors = soup.find("div", id="results").find_all("p", {"class": None})
         locations = soup.find("div", id="results").find_all("p", {"class": "location"})
 
