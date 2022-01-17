@@ -53,9 +53,12 @@ def parse_response_html(error_dict):
         print(f"====== Errors within {key} ======")
         soup = BeautifulSoup(error_dict[key], "html.parser")
         all_errors = soup.find("div", id="results").find_all("p", {"class": None})
-        for error in all_errors:
-            error = error.text
-            print(error)
+        locations = soup.find("div", id="results").find_all("p", {"class": "location"})
+
+        for i in range(len(all_errors)):
+            error = all_errors[i].text
+            location = locations[i].text
+            print(f"{error} \nLocation: {location}\n")
         print("\n\n")
 
 if __name__ == '__main__':
