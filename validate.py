@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 import os
-
+import sys
 import requests
 from bs4 import BeautifulSoup
+import glob
 
 """ This script will validate all local directory html and css files against the w3c public API.
     It then prints a basic report to the console containing the success or failure of each validated file."""
@@ -13,14 +14,19 @@ __email__: "hillbgh@gmail.com"
 url = "https://validator.w3.org/nu/"
 
 def main():
-    local_dir = os.getcwd()
-    local_files = os.listdir(local_dir)
-    send_files = []
+    # Default run
+    if (len(sys.argv) < 2):
+        pass
+
     errors = {}
 
-    for name in local_files:
-        if ".html" in name or ".css" in name:
-            send_files.append(name)
+    directory = "./"
+    pathname = directory + "/**/*.html"
+    send_files = glob.glob(pathname, recursive=True)
+
+    directory = "./"
+    pathname = directory + "/**/*.css"
+    send_files.extend(glob.glob(pathname, recursive=True))
 
     print("===== Report =====")
 
@@ -38,10 +44,10 @@ def main():
             response = response.content
 
             if b"There were errors" in response:
-                print(f"{item} : Failed")
+                print(f"{item} : \033[0;31mFailed\033[0m")
                 errors[item] = response
             else:
-                print(f"{item} : Success")
+                print(f"{item} : \033[0;32mSuccess\033[0m")
     print("====== End ======\n\n")
 
     if errors:
@@ -64,4 +70,4 @@ def parse_response_html(error_dict):
         print("\n\n")
 
 if __name__ == '__main__':
-   main()
+    main()
