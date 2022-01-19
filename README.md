@@ -7,5 +7,8 @@ Simply place the script within the directory containing the files and run, an ou
 > "pip install -r requirements.txt"
 
 ## Tentative Updates
-- navigate with os.walk
+- Navigate with recursive file exploration (allowing for all subdirs to be validated).
+- Add flag to validate specific files only.
 
+## Branching
+- Feel free to contribute
