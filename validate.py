@@ -1,6 +1,4 @@
 #!/usr/bin/env python
-import os
-import sys
 import requests
 from bs4 import BeautifulSoup
 import glob
@@ -14,9 +12,6 @@ __email__: "hillbgh@gmail.com"
 url = "https://validator.w3.org/nu/"
 
 def main():
-    # Default run
-    if (len(sys.argv) < 2):
-        pass
 
     errors = {}
 
