@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import requests
+import sys
 from bs4 import BeautifulSoup
 import glob
 
@@ -11,17 +12,19 @@ __email__: "hillbgh@gmail.com"
 
 url = "https://validator.w3.org/nu/"
 
+
 def main():
-
     errors = {}
+    if len(sys.argv) < 2:
+        directory = "./"
+        pathname = directory + "/**/*.html"
+        send_files = glob.glob(pathname, recursive=True)
 
-    directory = "./"
-    pathname = directory + "/**/*.html"
-    send_files = glob.glob(pathname, recursive=True)
-
-    directory = "./"
-    pathname = directory + "/**/*.css"
-    send_files.extend(glob.glob(pathname, recursive=True))
+        directory = "./"
+        pathname = directory + "/**/*.css"
+        send_files.extend(glob.glob(pathname, recursive=True))
+    else:
+        send_files = sys.argv[1:]
 
     print("===== Report =====")
 
@@ -51,7 +54,7 @@ def main():
 
 def parse_response_html(error_dict):
     for key in error_dict:
-    # The key is the file name, the value is the response for the file.
+        # The key is the file name, the value is the response for the file.
         print(f"====== Errors within {key} ======")
         soup = BeautifulSoup(error_dict[key], "html.parser")
 
@@ -63,6 +66,7 @@ def parse_response_html(error_dict):
             location = locations[i].text
             print(f"{error} \nLocation: {location}\n")
         print("\n\n")
+
 
 if __name__ == '__main__':
     main()
