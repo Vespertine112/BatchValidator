@@ -13,3 +13,5 @@ Simply place the script within the directory containing the files and run, an ou
 
 ## Pull Requests
 - Feel free to contribute
+## Updates
+- Add RICH formatting
